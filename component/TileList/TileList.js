@@ -1,5 +1,5 @@
 import React from 'react';
-import './../TileList/TileList.css';
+import { StyleSheet, View } from 'react-native';
 import TileContainer from '../../container/TileContainer/TileContainer';
 
 const renderTile = (props, id) => {
@@ -27,7 +27,7 @@ const renderRow = (props, rowIndex) => {
         tiles.push(renderTile(props, id));
     }
 
-    return (<div className="row" key={rowIndex}>{tiles}</div>);
+    return (<View style={styles.row} key={rowIndex}>{tiles}</View>);
 };
 
 const renderRows = (props) => {
@@ -36,8 +36,8 @@ const renderRows = (props) => {
     let rows = [];
 
     for (let rowIndex = 0; rowIndex < rowLength; rowIndex++) {
-        rows.push(renderRow(props, rowIndex));
-    }
+    rows.push(renderRow(props, rowIndex));
+}
 
     return rows;
 };
@@ -47,10 +47,24 @@ const TileList = (props) => {
     const { columnLength, tileSize } = props;
 
     const style = {
-        width: tileSize * columnLength + 'px'
+        margin: styles.board.margin,    //TODO - Figure out best way to copy styles over
+        width: tileSize * columnLength
     };
 
-    return <div className="board" style={style}>{rows}</div>;
+    return <View style={style}>{rows}</View>;
 };
+
+const styles = StyleSheet.create({
+    board: {
+        marginVertical: 44
+    },
+
+    row: {
+        backgroundColor: '#000',
+        display: 'inline-block',
+        //whiteSpace: 'nowrap',
+        marginHorizontal: 44
+    }
+});
 
 export default TileList;

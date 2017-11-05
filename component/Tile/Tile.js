@@ -1,5 +1,5 @@
 import React from 'react';
-import './Tile.css';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const getTileAttributes = (props) => {
     const { classNames, id, onMouseDown, onMouseUp, onRightClick, style } = props;
@@ -11,15 +11,8 @@ const getTileAttributes = (props) => {
     };
 
     //check if a touch device like a smart phone or tablet
-    if ('ontouchstart' in window) {
-        attributes.onTouchStart = (event) => onMouseDown({ event, id });
-        attributes.onTouchEnd = (event) => onMouseUp({ event, id });
-    } else {
-        //Otherwise use mouse events instead
-        attributes.onContextMenu = () => onRightClick({ id });
-        attributes.onMouseDown = (event) => onMouseDown({ event, id });
-        attributes.onMouseUp = (event) => onMouseUp({ event, id });
-    }
+    attributes.onTouchStart = (event) => onMouseDown({ event, id });
+    attributes.onTouchEnd = (event) => onMouseUp({ event, id });
 
     return attributes;
 };
@@ -79,9 +72,9 @@ const getTileDisplayValue = (props) => {
 const getTileStyle = (props) => {
     const { tileSize } = props;
     return {
-        height: tileSize + 'px',
-        lineHeight: tileSize + 'px',
-        width: tileSize + 'px'
+        height: tileSize,
+        lineHeight: tileSize,
+        width: tileSize
     }
 };
 
@@ -109,7 +102,11 @@ const Tile = (props) => {
     const attributes = getTileAttributes({...props, classNames, style});
 
     return (
-        <button {...attributes}>{displayValue}</button>
+        <TouchableWithoutFeedback {...attributes}>
+            <View style={style}>
+                <Text>{displayValue}</Text>
+            </View>
+        </TouchableWithoutFeedback>
     );
 };
 
