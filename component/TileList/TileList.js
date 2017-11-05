@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     },
 
     container: {
-        marginRight: 100
+        marginRight: 44
     },
 
     row: {
