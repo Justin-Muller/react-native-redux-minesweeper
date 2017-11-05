@@ -73,7 +73,7 @@ const getTileStyle = (props) => {
     const { tileSize } = props;
     return {
         height: tileSize,
-        lineHeight: tileSize,
+        //lineHeight: tileSize,
         width: tileSize
     }
 };
