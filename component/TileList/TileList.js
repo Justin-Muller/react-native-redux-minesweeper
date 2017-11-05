@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import TileContainer from '../../container/TileContainer/TileContainer';
 
 const renderTile = (props, id) => {
@@ -46,24 +46,32 @@ const TileList = (props) => {
     const rows = renderRows(props);
     const { columnLength, tileSize } = props;
 
-    const style = {
-        margin: styles.board.margin,    //TODO - Figure out best way to copy styles over
-        width: tileSize * columnLength
-    };
+    const style = StyleSheet.flatten([{
+        width: (tileSize * (columnLength + 2))  // + 2 is for padding left + right.
+    }, styles.board]);
 
-    return <View style={style}>{rows}</View>;
+    return <ScrollView contentContainerStyle={style} maximumZoomScale={2}>
+        <View style={styles.container}>{rows}</View>
+    </ScrollView>;
 };
 
 const styles = StyleSheet.create({
     board: {
-        marginVertical: 44
+        paddingLeft: 44,
+        paddingVertical: 44
+    },
+
+    container: {
+        marginRight: 100
     },
 
     row: {
+        flex: 1,
+        flexDirection: 'row',
         backgroundColor: '#000',
         display: 'inline-block',
         //whiteSpace: 'nowrap',
-        marginHorizontal: 44
+
     }
 });
 

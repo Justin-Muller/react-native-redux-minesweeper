@@ -1,81 +1,81 @@
 import React from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const getTileAttributes = (props) => {
-    const { classNames, id, onMouseDown, onMouseUp, onRightClick, style } = props;
+  const { classNames, id, onMouseDown, onMouseUp, onRightClick, style } = props;
 
-    let attributes = {
-        className: classNames.join(' '),
-        type: 'button',
-        style
-    };
+  let attributes = {
+    className: classNames.join(' '),
+    type: 'button',
+    style
+  };
 
-    //check if a touch device like a smart phone or tablet
-    attributes.onTouchStart = (event) => onMouseDown({ event, id });
-    attributes.onTouchEnd = (event) => onMouseUp({ event, id });
+  //check if a touch device like a smart phone or tablet
+  attributes.onTouchStart = (event) => onMouseDown({event, id});
+  attributes.onTouchEnd = (event) => onMouseUp({event, id});
 
-    return attributes;
+  return attributes;
 };
 
 const getTileClassNames = (props) => {
-    const classNames = ['tile'];
-    const { disabled, flagged, incorrect, mine, visible } = props;
+  const classNames = ['tile'];
+  const { disabled, flagged, incorrect, mine, visible } = props;
 
-    if (disabled) {
-        classNames.push('tile-disabled');
+  if (disabled) {
+    classNames.push('tile-disabled');
+  }
+
+  if (incorrect) {
+    classNames.push('tile-incorrect');
+  } else if (flagged) {
+    classNames.push('tile-flag');
+  }
+
+  if (visible) {
+    classNames.push('tile-revealed');
+    if (mine) {
+      classNames.push('tile-mine');
     }
+  }
 
-    if (incorrect) {
-        classNames.push('tile-incorrect');
-    } else if (flagged) {
-        classNames.push('tile-flag');
-    }
-
-    if (visible) {
-        classNames.push('tile-revealed');
-        if (mine) {
-            classNames.push('tile-mine');
-        }
-    }
-
-    return classNames;
+  return classNames;
 };
 
 const getTileDisplayValue = (props) => {
-    const { flagged, incorrect, marked, mine, value, visible } = props;
+  const { flagged, incorrect, marked, mine, value, visible } = props;
 
-    if (incorrect) {
-        return '\u2715';
+  if (incorrect) {
+    return '\u2715';
+  }
+
+  if (flagged) {
+    return '\u2691';
+  }
+
+  if (visible) {
+    if (mine) {
+      return '\u2739';
     }
 
-    if (flagged) {
-        return '\u2691';
+    if (value) {
+      return value;
     }
+  }
 
-    if (visible) {
-        if (mine) {
-            return '\u2739';
-        }
+  if (marked) {
+    return '?';
+  }
 
-        if (value) {
-            return value;
-        }
-    }
-
-    if (marked) {
-        return '?';
-    }
-
-    return '\u00A0';
+  return '\u00A0';
 };
 
 const getTileStyle = (props) => {
-    const { tileSize } = props;
-    return {
-        height: tileSize,
-        //lineHeight: tileSize,
-        width: tileSize
-    }
+  const { tileSize } = props;
+  return {
+    height: tileSize,
+    //lineHeight: tileSize,
+    width: tileSize
+  }
 };
 
 /**
@@ -96,18 +96,31 @@ const getTileStyle = (props) => {
  * @returns {DOMElement}
  */
 const Tile = (props) => {
-    const classNames = getTileClassNames(props);
-    const displayValue = getTileDisplayValue(props);
-    const style = getTileStyle(props);
-    const attributes = getTileAttributes({...props, classNames, style});
+  const classNames = getTileClassNames(props);
+  const displayValue = getTileDisplayValue(props);
+  const style = getTileStyle(props);
+  const attributes = getTileAttributes({...props, classNames, style});
 
-    return (
-        <TouchableWithoutFeedback {...attributes}>
-            <View style={style}>
-                <Text>{displayValue}</Text>
-            </View>
-        </TouchableWithoutFeedback>
-    );
+  return (
+    <TouchableWithoutFeedback>
+      <View style={styles.tile}>
+        <Text>
+
+        </Text>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+  //<Text>{displayValue}</Text>
 };
+
+const styles = StyleSheet.create({
+  tile: {
+    backgroundColor: '#000',
+    borderColor: '#999',
+    borderWidth: 1,
+    height: 44,
+    width: 44
+  }
+});
 
 export default Tile;

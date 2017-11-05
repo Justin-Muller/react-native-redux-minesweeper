@@ -18,8 +18,8 @@ import tileMouseUpReducer from './tileMouseUpReducer/tileMouseUpReducer';
  */
 const defaults = {
     mineLength: 20,
-    columnLength: 8,
-    rowLength: 13,
+    columnLength: 20,
+    rowLength: 20,
     tileSize: 44
 };
 
