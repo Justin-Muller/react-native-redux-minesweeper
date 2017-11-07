@@ -13,10 +13,6 @@
     }
 }
 
-.kbd-navigation .tile:focus {
-    background: #ddd;
-}
-
 .tile {
     background: transparent;
     border: 1px solid #999;
@@ -31,12 +27,6 @@
     text-align: center;
     z-index: 1;
 }
-
-.tile:focus {
-    outline: none;
-}
-
-/** Allow for theming options **/
 
 .tile.tile-disabled {
     opacity: 0.2;

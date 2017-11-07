@@ -11,40 +11,16 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onMouseDown: ({ event, id }) => {
-
-            //TODO: test windows
-            //ignore right click
-            if (event.nativeEvent && event.nativeEvent.which > 1) {
-                return;
-            }
-
-            //short delay to allow for tapping on a touch device to reveal tile.
-            setTimeout(() => {
-                dispatch({
-                    type: 'TILE_MOUSE_DOWN_END',
-                    id
-                });
-            }, 500);
-            //TODO ^-- Make this time configurable in the settings menu later...
-
+        onLongPress: ({ event, id }) => {
             dispatch({
-                type: 'TILE_MOUSE_DOWN_START',
+                type: 'TILE_LONG_PRESS',
                 id
             });
         },
 
-        onMouseUp: ({ event, id }) => {
+        onPress: ({ event, id }) => {
             dispatch({
-                type: 'TILE_MOUSE_UP',
-                event,
-                id
-            });
-        },
-
-        onRightClick: ({ id }) => {
-            dispatch({
-                type: 'TILE_ALT_CLICK',
+                type: 'TILE_PRESS',
                 id
             });
         }
