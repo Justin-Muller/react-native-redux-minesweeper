@@ -32,7 +32,7 @@ const getTileDisplayValue = (props) => {
 const getTileStyle = (props) => {
   const textStyleList = [textStyles.tile];
   const viewStyleList = [viewStyles.tile];
-  const { disabled, flagged, incorrect, mine, visible } = props;
+  const { disabled, flagged, incorrect, marked, mine, visible } = props;
 
   if (disabled) {
     textStyleList.push(textStyles.tileDisabled);
@@ -45,12 +45,18 @@ const getTileStyle = (props) => {
   } else if (flagged) {
     textStyleList.push(textStyles.tileFlag);
     viewStyleList.push(viewStyles.tileFlag);
-  }
 
-  if (visible) {
+    if (visible) {
+      textStyleList.push(textStyles.tileFlagRevealed);
+      viewStyleList.push(viewStyles.tileFlagRevealed);
+    }
+  } else if (marked) {
+    textStyleList.push(textStyles.tileMarked);
+    viewStyleList.push(viewStyles.tileMarked);
+  } else if (visible) {
     textStyleList.push(textStyles.tileRevealed);
     viewStyleList.push(viewStyles.tileRevealed);
-    if (mine) {
+    if (mine && !flagged) {
       textStyleList.push(textStyles.tileMine);
       viewStyleList.push(viewStyles.tileMine);
     }
@@ -96,16 +102,29 @@ const Tile = (props) => {
 
 
 const textStyles = StyleSheet.create({
-  tile: {},
+  tile: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
 
   tileDisabled: {},
 
   tileFlag: {
+    color: '#FF8000'
+  },
+
+
+
+  tileFlagRevealed: {
     color: '#3CB371'
   },
 
   tileIncorrect: {
     color: '#CD5C5C'
+  },
+
+  tileMarked: {
+    color: '#FFFF33'
   },
 
   tileRevealed: {
@@ -115,6 +134,7 @@ const textStyles = StyleSheet.create({
   tileMine: {
     color: '#FF0000'
   }
+
 
 
   //TODO - Learn animation in react native.
@@ -131,10 +151,13 @@ const textStyles = StyleSheet.create({
 
 const viewStyles = StyleSheet.create({
   tile: {
+    alignItems: 'center',
     backgroundColor: '#000',
     borderColor: '#999',
     borderWidth: 1,
+    flex: 1,
     height: 44,
+    justifyContent: 'center',
     width: 44
   },
 
@@ -146,9 +169,15 @@ const viewStyles = StyleSheet.create({
     opacity: 1
   },
 
+  tileFlagRevealed: {},
+
   tileIncorrect: {
     backgroundColor: '#fff',
     opacity: 1
+  },
+
+  tileMarked: {
+
   },
 
   tileRevealed: {

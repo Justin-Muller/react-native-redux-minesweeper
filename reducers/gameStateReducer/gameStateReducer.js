@@ -15,9 +15,9 @@ import tileClickReducer from './tileClickReducer/tileClickReducer';
  * @param {number} [defaults.tileSize=44] - How big the tiles are in pixels.
  */
 const defaults = {
-    mineLength: 20,
-    columnLength: 20,
-    rowLength: 20,
+    mineLength: 4,
+    columnLength: 5,
+    rowLength: 5,
     tileSize: 44
 };
 
