@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
+import StorybookUI from './storybook';
 import Game from './component/Game/Game';
 import configureStore from './configureStore';
 
@@ -10,10 +11,12 @@ class App extends Component {
     render() {
         return (
           <Provider store={store}>
-              <Game />
+
+            <Game />
           </Provider>
         );
     }
 }
 
-export default App;
+//export default App;
+module.exports = App;

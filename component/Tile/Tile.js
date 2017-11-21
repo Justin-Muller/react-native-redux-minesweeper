@@ -113,14 +113,12 @@ const textStyles = StyleSheet.create({
     color: '#FF8000'
   },
 
-
-
   tileFlagRevealed: {
-    color: '#3CB371'
+    color: '#009900'
   },
 
   tileIncorrect: {
-    color: '#CD5C5C'
+    color: '#fff'
   },
 
   tileMarked: {
@@ -132,10 +130,8 @@ const textStyles = StyleSheet.create({
   },
 
   tileMine: {
-    color: '#FF0000'
+    color: '#fff'
   }
-
-
 
   //TODO - Learn animation in react native.
   /*
@@ -169,10 +165,12 @@ const viewStyles = StyleSheet.create({
     opacity: 1
   },
 
-  tileFlagRevealed: {},
+  tileFlagRevealed: {
+    backgroundColor: '#00ffcc'
+  },
 
   tileIncorrect: {
-    backgroundColor: '#fff',
+    backgroundColor: '#cc0033',
     opacity: 1
   },
 
@@ -185,6 +183,7 @@ const viewStyles = StyleSheet.create({
   },
 
   tileMine: {
+    backgroundColor: '#FF0000',
     opacity: 1
   }
 

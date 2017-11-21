@@ -1,5 +1,6 @@
-import { createStore } from 'redux';
+import { combineReducers, createStore } from 'redux';
 import gameStateReducer from './reducers/gameStateReducer/gameStateReducer';
+import storybookReducer from './reducers/storybookReducer/storybookReducer';
 
 export default function configureStore(initialState) {
   const store = createStore(gameStateReducer, initialState);
