@@ -1,15 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
-import GameOverConfirmContainer from '../../container/GameOverConfirmContainer/GameOverConfirmContainer';
-import TileListContainer from '../../container/TileListContainer/TileListContainer';
+import GameOverConfirm from '../GameOverConfirm/GameOverConfirm';
+import TileList from '../TileList/TileList';
 
 const Game = (props) => {
     return (
         <View>
-          <TileListContainer />
+          <TileList />
         </View>
     );
-  //<GameOverConfirmContainer />
+  //<GameOverConfirm />
 };
 
 export default Game;

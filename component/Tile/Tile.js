@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const getTileDisplayValue = (props) => {
   const { flagged, incorrect, marked, mine, value, visible } = props;
@@ -99,6 +101,17 @@ const Tile = (props) => {
   );
 };
 
+Tile.propTypes = {
+  disabled: PropTypes.bool,
+  flagged: PropTypes.bool,
+  incorrect: PropTypes.bool,
+  marked: PropTypes.bool,
+  mine: PropTypes.bool,
+  onPress: PropTypes.func.isRequired,
+  onLongPress: PropTypes.func.isRequired,
+  value: PropTypes.number,
+  visible: PropTypes.bool
+};
 
 
 const textStyles = StyleSheet.create({
@@ -200,4 +213,30 @@ const viewStyles = StyleSheet.create({
   //TODO
 });
 
-export default Tile;
+const mapStateToProps = (state) => {
+  const { gameOver, tileSize } = state;
+  return {
+    disabled: gameOver,
+    tileSize
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLongPress: ({ event, id }) => {
+      dispatch({
+        type: 'TILE_LONG_PRESS',
+        id
+      });
+    },
+
+    onPress: ({ event, id }) => {
+      dispatch({
+        type: 'TILE_PRESS',
+        id
+      });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tile);

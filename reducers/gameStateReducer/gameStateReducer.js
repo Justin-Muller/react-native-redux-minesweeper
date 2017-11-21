@@ -21,6 +21,14 @@ const defaults = {
     tileSize: 44
 };
 
+const actionTypeMap = {
+  GAME_FINISHED: gameFinishedReducer,
+  GAME_INIT: gameInitReducer,
+  GAME_START: gameStartReducer,
+  TILE_LONG_PRESS: tileAltClickReducer,
+  TILE_PRESS: tileClickReducer
+};
+
 /**
  * @reducer gameStateReducer
  * @param {object}  state
@@ -46,14 +54,7 @@ const gameStateReducer = (state, action) => {
         return gameInitReducer(defaults);
     }
 
-    const actionTypeMap = {
-            GAME_FINISHED: gameFinishedReducer,
-            GAME_INIT: gameInitReducer,
-            GAME_START: gameStartReducer,
-            TILE_LONG_PRESS: tileAltClickReducer,
-            TILE_PRESS: tileClickReducer
-        },
-        actionTypeReducer = actionTypeMap[action.type];
+    const actionTypeReducer = actionTypeMap[action.type];
 
     if (actionTypeReducer) {
         return actionTypeReducer(state, action);

@@ -1,9 +1,15 @@
 import { combineReducers, createStore } from 'redux';
 import gameStateReducer from './reducers/gameStateReducer/gameStateReducer';
-import storybookReducer from './reducers/storybookReducer/storybookReducer';
+//import navigationReducer from './reducers/navigationReducer/navigationReducer';
 
 export default function configureStore(initialState) {
-  const store = createStore(gameStateReducer, initialState);
+  const rootReducer = gameStateReducer;
+  //const rootReducer = combineReducers({
+  //  gameState: gameStateReducer,
+  //  navigation: navigationReducer
+  //});
+
+  const store = createStore(rootReducer, initialState);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

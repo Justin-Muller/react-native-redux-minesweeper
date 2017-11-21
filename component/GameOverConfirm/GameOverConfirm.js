@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 /**
  * Pops up a confirm dialog to the user when the user has won or lost the game.
@@ -31,4 +33,35 @@ const GameOverConfirm = (props) => {
     );
 };
 
-export default GameOverConfirm;
+GameOverConfirm.propTypes = {
+    onConfirm: PropTypes.func.isRequired,
+    show: PropTypes.bool,
+    win: PropTypes.bool
+};
+
+const mapStateToProps = (state) => {
+    const { showGameOverMessage, win } = state;
+
+    return {
+        show: showGameOverMessage,
+        win
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onConfirm: () => {
+            dispatch({
+                type: 'GAME_INIT'
+            });
+        },
+
+        onCancel: () => {
+            dispatch({
+                type: 'GAME_FINISHED'
+            });
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameOverConfirm);
