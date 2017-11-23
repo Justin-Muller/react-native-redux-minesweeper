@@ -6,7 +6,7 @@ export default function configureStore(initialState) {
   const rootReducer = gameStateReducer;
   //const rootReducer = combineReducers({
   //  gameState: gameStateReducer,
-  //  navigation: navigationReducer
+  //  navigationState: navigationReducer
   //});
 
   const store = createStore(rootReducer, initialState);

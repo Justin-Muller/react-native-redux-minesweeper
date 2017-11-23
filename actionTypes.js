@@ -1,0 +1,5 @@
+export const
+  GAME_INIT       = 'GAME_INIT',
+  GAME_FINISHED   = 'GAME_FINISHED',
+  TILE_LONG_PRESS = 'TILE_LONG_PRESS',
+  TILE_PRESS      = 'TILE_PRESS';

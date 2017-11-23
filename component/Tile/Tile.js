@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { tileLongPress, tilePress } from '../../actionCreators';
 
 const getTileDisplayValue = (props) => {
   const { flagged, incorrect, marked, mine, value, visible } = props;
@@ -35,6 +36,8 @@ const getTileStyle = (props) => {
   const textStyleList = [textStyles.tile];
   const viewStyleList = [viewStyles.tile];
   const { disabled, flagged, incorrect, marked, mine, visible } = props;
+
+  //TODO - Clean this part of the code up.
 
   if (disabled) {
     textStyleList.push(textStyles.tileDisabled);
@@ -92,8 +95,8 @@ const Tile = (props) => {
 
   return (
     <TouchableWithoutFeedback
-       onPress={(event) => onPress({event, id})}
-       onLongPress={(event) => onLongPress({event, id})}>
+       onPress={() => onPress(id)}
+       onLongPress={() => onLongPress(id)}>
       <View style={style.View}>
         <Text style={style.Text}>{displayValue}</Text>
       </View>
@@ -223,18 +226,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLongPress: ({ event, id }) => {
-      dispatch({
-        type: 'TILE_LONG_PRESS',
-        id
-      });
+    onLongPress: (id) => {
+      dispatch(tileLongPress(id));
     },
 
-    onPress: ({ event, id }) => {
-      dispatch({
-        type: 'TILE_PRESS',
-        id
-      });
+    onPress: (id) => {
+      dispatch(tilePress(id));
     }
   };
 };

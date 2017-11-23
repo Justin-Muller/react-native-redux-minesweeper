@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { gameInit, gameFinished } from '../../actionCreators';
 
 /**
  * Pops up a confirm dialog to the user when the user has won or lost the game.
@@ -51,15 +52,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onConfirm: () => {
-            dispatch({
-                type: 'GAME_INIT'
-            });
+            dispatch(gameInit());
         },
 
         onCancel: () => {
-            dispatch({
-                type: 'GAME_FINISHED'
-            });
+            dispatch(gameFinished());
         }
     }
 };
