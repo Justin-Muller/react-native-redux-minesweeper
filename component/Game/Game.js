@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import GameOverConfirm from '../GameOverConfirm/GameOverConfirm';
 import TileList from '../TileList/TileList';
 
-const Game = (props) => {
+const Game = () => {
     return (
         <View>
           <TileList />

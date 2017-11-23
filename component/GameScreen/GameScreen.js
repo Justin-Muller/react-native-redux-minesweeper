@@ -3,7 +3,7 @@ import Game from '../Game/Game';
 
 class GameScreen extends Component {
   static navigationOptions = {
-    title: 'Welcome'
+    title: 'React Native Minesweeper'
   };
 
   render() {

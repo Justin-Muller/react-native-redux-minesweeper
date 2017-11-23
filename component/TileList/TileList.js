@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     const { columnLength, flaggedList, incorrectList, markedList,
-      mineList, rowLength, tileSize, valueList, visibleList } = state;
+      mineList, rowLength, tileSize, valueList, visibleList } = state.gameState;
 
     return {
         columnLength,

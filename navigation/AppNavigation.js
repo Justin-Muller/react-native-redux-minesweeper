@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import { DrawerNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
+
+import GameStack from './GameStack';
 import StorybookUI from '../storybook';
-import GameScreen from '../component/GameScreen/GameScreen';
 
-console.log('here???');
-
-const AppRouteConfigs = {
-  Game: { screen: GameScreen },
+const appRouteConfig = {
+  GameStack: { screen: GameStack },
   Storybook: { screen: StorybookUI }
 };
 
-export const AppNavigator = StackNavigator(AppRouteConfigs);
+export const AppNavigation = DrawerNavigator(appRouteConfig);
 
 const AppWithNavigationState = ({ dispatch, navigationState }) => (
-  <AppNavigator navigation={ addNavigationHelpers({ dispatch, state: navigationState })} />
+  <AppNavigation navigation={ addNavigationHelpers({ dispatch, state: navigationState })} />
 );
 
 AppWithNavigationState.propTypes = {

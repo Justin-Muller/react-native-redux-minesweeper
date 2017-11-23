@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
-//import AppWithNavigationState from './navigator/AppNavigator';
+import AppWithNavigationState from './navigation/AppNavigation';
 import configureStore from './configureStore';
 import Game from './component/Game/Game';
 
@@ -11,10 +11,11 @@ class App extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <Game />
+        <AppWithNavigationState />
       </Provider>
     );
-    //<AppWithNavigationState />
+
+    //<Game />
   }
 }
 
