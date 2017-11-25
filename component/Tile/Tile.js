@@ -4,6 +4,50 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { tileLongPress, tilePress } from '../../actionCreators';
 
+
+/**
+ * The tile can contain either a mine, a number (value), a flag (flagged), a question mark (marked) or blank (value = 0). The tile will initially be invisible (visible = false) until the user has clicked on the tile to reveal a value or mine.
+ * @component Tile
+ * @param {Object}   props
+ * @param {Boolean}  props.disabled - Disables the tile by greying out tile. Note: Does not stop click event from propagating.
+ * @param {Boolean}  props.flagged - Displays a flag icon in the tile.
+ * @param {Boolean}  props.incorrect - Displays a mine icons with a cross in the tile.
+ * @param {Boolean}  props.marked - Displays a question mark in the tile.
+ * @param {Boolean}  props.mine - Only displays mine when visible flag is true.
+ * @param {Function} props.onPress - Click/Touch handler called when tile has left click/touch is released.
+ * @param {Function} props.onLongPress - Click/Touch handler called when tile is right clicked.
+ * @param {Number}   props.value - Only displays value when visible flag is true.
+ * @param {Boolean}  props.visible - Visible flag to show/hide the value or mine in the tile.
+ * @returns {DOMElement}
+ */
+const Tile = (props) => {
+  const { id, onPress, onLongPress } = props;
+  const displayValue = getTileDisplayValue(props);
+  const style = getTileStyle(props);
+
+  return (
+    <TouchableWithoutFeedback
+      onPress={() => onPress(id)}
+      onLongPress={() => onLongPress(id)}>
+      <View style={style.View}>
+        <Text style={style.Text}>{displayValue}</Text>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
+
+Tile.propTypes = {
+  disabled: PropTypes.bool,
+  flagged: PropTypes.bool,
+  incorrect: PropTypes.bool,
+  marked: PropTypes.bool,
+  mine: PropTypes.bool,
+  onPress: PropTypes.func.isRequired,
+  onLongPress: PropTypes.func.isRequired,
+  value: PropTypes.number,
+  visible: PropTypes.bool
+};
+
 const getTileDisplayValue = (props) => {
   const { flagged, incorrect, marked, mine, value, visible } = props;
 
@@ -73,50 +117,6 @@ const getTileStyle = (props) => {
   };
 };
 
-/**
- * The tile can contain either a mine, a number (value), a flag (flagged), a question mark (marked) or blank (value = 0). The tile will initially be invisible (visible = false) until the user has clicked on the tile to reveal a value or mine.
- * @component Tile
- * @param {Object}   props
- * @param {Boolean}  props.disabled - Disables the tile by greying out tile. Note: Does not stop click event from propagating.
- * @param {Boolean}  props.flagged - Displays a flag icon in the tile.
- * @param {Boolean}  props.incorrect - Displays a mine icons with a cross in the tile.
- * @param {Boolean}  props.marked - Displays a question mark in the tile.
- * @param {Boolean}  props.mine - Only displays mine when visible flag is true.
- * @param {Function} props.onPress - Click/Touch handler called when tile has left click/touch is released.
- * @param {Function} props.onLongPress - Click/Touch handler called when tile is right clicked.
- * @param {Number}   props.value - Only displays value when visible flag is true.
- * @param {Boolean}  props.visible - Visible flag to show/hide the value or mine in the tile.
- * @returns {DOMElement}
- */
-const Tile = (props) => {
-  const { id, onPress, onLongPress } = props;
-  const displayValue = getTileDisplayValue(props);
-  const style = getTileStyle(props);
-
-  return (
-    <TouchableWithoutFeedback
-       onPress={() => onPress(id)}
-       onLongPress={() => onLongPress(id)}>
-      <View style={style.View}>
-        <Text style={style.Text}>{displayValue}</Text>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
-
-Tile.propTypes = {
-  disabled: PropTypes.bool,
-  flagged: PropTypes.bool,
-  incorrect: PropTypes.bool,
-  marked: PropTypes.bool,
-  mine: PropTypes.bool,
-  onPress: PropTypes.func.isRequired,
-  onLongPress: PropTypes.func.isRequired,
-  value: PropTypes.number,
-  visible: PropTypes.bool
-};
-
-
 const textStyles = StyleSheet.create({
   tile: {
     fontSize: 20,
@@ -167,7 +167,7 @@ const viewStyles = StyleSheet.create({
     backgroundColor: '#000',
     borderColor: '#999',
     borderWidth: 1,
-    flex: 1,
+    //flex: 1,
     height: 44,
     justifyContent: 'center',
     width: 44
