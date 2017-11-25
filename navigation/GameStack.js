@@ -1,17 +1,25 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import GameScreen from '../component/GameScreen/GameScreen';
+import { Game } from '../component';
 
 const routeConfig = {
-  GameScreen: { screen: GameScreen }
+  GameScreen: { screen: Game }
 };
 
 const defaultConfig = {
   navigationOptions: ({navigation}) => ({
-    headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+    headerLeft: <Text style={styles.text} onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>,
+    title: 'Minesweeper'
   })
 };
+
+const styles = StyleSheet.create({
+  text: {
+    color: '#007AFF',
+    marginLeft: 8
+  }
+});
 
 const GameStack = StackNavigator(routeConfig, defaultConfig);
 

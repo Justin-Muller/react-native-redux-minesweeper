@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import GameOverConfirm from '../GameOverConfirm/GameOverConfirm';
-import TileList from '../TileList/TileList';
+import { GameOverConfirm, TileList } from '../';
 
 const Game = () => {
     return (
